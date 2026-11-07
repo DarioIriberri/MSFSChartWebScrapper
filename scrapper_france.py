@@ -9,7 +9,10 @@ class SiaFranceScraper(BaseAIPScraper):
     def get_icao_prefixes(self) -> tuple:
         return ("LF", "SO", "TF", "FM", "NW", "NT")
 
-    def process_airport(self, page, icao: str, charts_dir: Path):
+    def setup_session(self, page):
+        pass
+
+    def process_airport(self, page, icao: str):
         # Build the aerodrome page URL using urljoin
         aerodrome_url = urljoin(URL, f"FR-AD-2.{icao}-fr-FR.html")
         page.goto(aerodrome_url, wait_until="networkidle", timeout=30000)

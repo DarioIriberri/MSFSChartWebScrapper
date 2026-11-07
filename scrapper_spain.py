@@ -6,11 +6,14 @@ from base_web_scrapper import BaseAIPScraper
 URL = "https://aip.enaire.es/AIP/"
 
 
-class EnaireScraper(BaseAIPScraper):
+class EnaireSpainScraper(BaseAIPScraper):
     def get_icao_prefixes(self) -> tuple:
         return ("LE", "GC")
 
-    def process_airport(self, page, icao: str, charts_dir: Path):
+    def setup_session(self, page):
+        pass
+
+    def process_airport(self, page, icao: str):
         page.goto(URL, wait_until="networkidle", timeout=30000)
         time.sleep(4)
 

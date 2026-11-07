@@ -16,20 +16,37 @@ class BaseAIPScraper(ABC):
         pass
 
     @abstractmethod
-    def process_airport(self, page, icao: str, charts_dir: Path):
+    def setup_session(self, page):
+        pass
+
+    @abstractmethod
+    def process_airport(self, page, icao: str):
         pass
 
     def clean_name(self, text: str) -> str:
         clean_str = "".join(c for c in text if c.isalnum() or c in (" ", "_", "-", ".")).strip()
         return " ".join(clean_str.split())
 
-    def download_file(self, full_url: str, file_path: Path) -> bool:
+    def download_file(self, full_url: str, file_path: Path, page=None) -> bool:
+        """Downloads a file using the active Playwright page context to handle
+
+        secure cookies and avoid SSL handshake errors, with a fallback to requests.
+        """
         try:
-            response = requests.get(full_url, timeout=15)
-            if response.status_code == 200:
-                with open(file_path, "wb") as f:
-                    f.write(response.content)
-                return True
+            if page:
+                # Use Playwright's APIRequestContext to fetch binaries securely within the session
+                response = page.request.get(full_url)
+                if response.status == 200:
+                    with open(file_path, "wb") as f:
+                        f.write(response.body())
+                    return True
+            else:
+                # Fallback mechanism if page context is omitted
+                response = requests.get(full_url, timeout=15, verify=True)
+                if response.status_code == 200:
+                    with open(file_path, "wb") as f:
+                        f.write(response.content)
+                    return True
         except Exception as e:
             print(f"  Error downloading {full_url}: {e}")
         return False
@@ -39,6 +56,8 @@ class BaseAIPScraper(ABC):
             browser = p.chromium.launch(headless=headless)
             context = browser.new_context()
             page = context.new_page()
+
+            self.setup_session(page)
 
             prefix = self.get_icao_prefixes()
 
@@ -62,7 +81,7 @@ class BaseAIPScraper(ABC):
                     charts_dir.mkdir(exist_ok=True)
 
                     try:
-                        charts = self.process_airport(page, icao, charts_dir)
+                        charts = self.process_airport(page, icao)
 
                         downloaded_count = 0
                         seen_urls = set()
@@ -89,7 +108,7 @@ class BaseAIPScraper(ABC):
 
                             file_path = charts_dir / filename
 
-                            if self.download_file(full_url, file_path):
+                            if self.download_file(full_url, file_path, page):
                                 downloaded_count += 1
                                 time.sleep(pause)
 
