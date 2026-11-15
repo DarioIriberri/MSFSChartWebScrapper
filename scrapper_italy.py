@@ -72,13 +72,13 @@ class EnavItalyScraper(BaseAIPScraper):
                 submit_btn.click()
 
             print(
-                "\n" + "=" * 60
+                "\n" + "=" * 66
             )
             print(
                 "Please enter your 2FA/MFA code in the browser window if necessary."
             )
             print(
-                "=" * 60 + "\n"
+                "=" * 66 + "\n"
             )
 
             # Wait for authentication completion (redirect back to ENAV static portal domain)
