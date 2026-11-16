@@ -11,9 +11,10 @@ def main():
   exe_dir = r'C:\Games\Microsoft Flight Simulator'
 
   print('Select flight profile:')
-  print('[1] Ultra (Render Res. 150 / LODs 200 / Texture Res. Ultra)')
-  print('[2] High  (Render Res. 100 / LODs 150 / Texture Res. Ultra)')
-  print('[3] Lite  (Render Res. 100 / LODs 150 / Texture Res. High)')
+  print('[1] Ultra  (Render Res. 150 / LODs 200 / Texture Res. Ultra)')
+  print('[2] High   (Render Res. 100 / LODs 200 / Texture Res. Ultra)')
+  print('[3] Medium (Render Res. 100 / LODs 150 / Texture Res. Ultra)')
+  print('[4] Lite   (Render Res. 100 / LODs 150 / Texture Res. High)')
   print('\nChoose an option (1, 2, 3): ', end='', flush=True)
 
   # Captures keypress, no need to press enter afterwards
@@ -23,7 +24,8 @@ def main():
   profile_map = {
       '1': 'UserCfg_Ultra.opt',
       '2': 'UserCfg_High.opt',
-      '3': 'UserCfg_Lite.opt',
+      '3': 'UserCfg_Medium.opt',
+      '4': 'UserCfg_Lite.opt',
   }
 
   if key_press not in profile_map:
