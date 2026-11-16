@@ -1,0 +1,11 @@
+/MSFS2020 Launcher/*.spec
+/MSFS2020 Launcher/MSFS2020_Launcher.py
+/MSFS2020 Launcher/build/MSFS2020/Analysis-00.toc
+/MSFS2020 Launcher/build/MSFS2020/*.toc
+/MSFS2020 Launcher/build/MSFS2020/*.pkg
+/MSFS2020 Launcher/build/MSFS2020/*.pyz
+/MSFS2020 Launcher/build/MSFS2020/base_library.zip
+/MSFS2020 Launcher/build/MSFS2020/localpycs/*.pyc
+/MSFS2020 Launcher/build/MSFS2020/warn-MSFS2020.txt
+/MSFS2020 Launcher/build/MSFS2020/xref-MSFS2020.html
+/__pycache__/*.pyc
