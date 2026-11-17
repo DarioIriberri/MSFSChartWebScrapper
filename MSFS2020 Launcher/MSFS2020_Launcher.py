@@ -15,7 +15,7 @@ def main():
   print('[2] High   (Render Res. 100 / LODs 200 / Texture Res. Ultra)')
   print('[3] Medium (Render Res. 100 / LODs 150 / Texture Res. Ultra)')
   print('[4] Lite   (Render Res. 100 / LODs 150 / Texture Res. High)')
-  print('\nChoose an option (1, 2, 3): ', end='', flush=True)
+  print('\nChoose an option: ', end='', flush=True)
 
   # Captures keypress, no need to press enter afterwards
   key_press = msvcrt.getch().decode('utf-8', errors='ignore')
