@@ -106,11 +106,14 @@ class BaseAIPScraper(ABC):
                                 continue
                             # ---------------------
 
+                            print(filename)
                             file_path = charts_dir / filename
 
                             if self.download_file(full_url, file_path, page):
                                 downloaded_count += 1
                                 time.sleep(pause)
+
+                            pass
 
                         print(f"-> Success! {downloaded_count} charts saved in {charts_dir}\n")
 
