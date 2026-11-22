@@ -3,6 +3,9 @@ import os
 import time
 from pathlib import Path
 import requests
+import shutil
+from urllib.parse import urlparse
+from urllib.request import url2pathname
 from playwright.sync_api import sync_playwright
 
 
@@ -27,21 +30,31 @@ class BaseAIPScraper(ABC):
         clean_str = "".join(c for c in text if c.isalnum() or c in (" ", "_", "-", ".")).strip()
         return " ".join(clean_str.split())
 
-    def download_file(self, full_url: str, file_path: Path, page=None) -> bool:
-        """Downloads a file using the active Playwright page context to handle
+    from pathlib import Path
+    import shutil
+    from urllib.parse import urlparse
+    from urllib.request import url2pathname
+    import requests
 
-        secure cookies and avoid SSL handshake errors, with a fallback to requests.
-        """
+    def download_file(self, full_url: str, file_path: Path, page=None) -> bool:
+        """Downloads a file over HTTP(S) or copies it directly when using a local file:// URL."""
         try:
+            parsed = urlparse(full_url)
+            if parsed.scheme == "file":
+                local_source = Path(url2pathname(parsed.path))
+                if not local_source.is_file():
+                    print(f"  Local file not found: {local_source}")
+                    return False
+                shutil.copy2(local_source, file_path)
+                return True
+
             if page:
-                # Use Playwright's APIRequestContext to fetch binaries securely within the session
                 response = page.request.get(full_url)
                 if response.status == 200:
                     with open(file_path, "wb") as f:
                         f.write(response.body())
                     return True
             else:
-                # Fallback mechanism if page context is omitted
                 response = requests.get(full_url, timeout=15, verify=True)
                 if response.status_code == 200:
                     with open(file_path, "wb") as f:
@@ -49,6 +62,7 @@ class BaseAIPScraper(ABC):
                     return True
         except Exception as e:
             print(f"  Error downloading {full_url}: {e}")
+
         return False
 
     def execute(self, headless=True, pause=1):
@@ -106,7 +120,7 @@ class BaseAIPScraper(ABC):
                                 continue
                             # ---------------------
 
-                            print(filename)
+                            print(filename.upper())
                             file_path = charts_dir / filename
 
                             if self.download_file(full_url, file_path, page):
