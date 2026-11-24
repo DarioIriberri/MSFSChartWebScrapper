@@ -10,7 +10,7 @@ USERNAME = "derp@gmail.com"
 PASSWORD = "derp"
 
 
-class EnavItalyScraper(BaseAIPScraper):
+class ItalyScraper(BaseAIPScraper):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.menu_html = ""

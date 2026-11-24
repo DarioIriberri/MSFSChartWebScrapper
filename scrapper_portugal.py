@@ -6,7 +6,7 @@ from base_web_scrapper import BaseAIPScraper
 URL = "file:///Z:/Downloads/1795174847862_AIS_EAIP_ISO_26NOV2026/eAIP/html/eAIP/"
 
 
-class NavPortugalScraper(BaseAIPScraper):
+class PortugalScraper(BaseAIPScraper):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.allowed_types = (

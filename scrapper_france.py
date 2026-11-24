@@ -5,7 +5,7 @@ from base_web_scrapper import BaseAIPScraper
 
 URL = "https://www.sia.aviation-civile.gouv.fr/media/dvd/eAIP_29_OCT_2026/FRANCE/AIRAC-2026-10-29/html/eAIP/"
 
-class SiaFranceScraper(BaseAIPScraper):
+class FranceScraper(BaseAIPScraper):
     def get_icao_prefixes(self) -> tuple:
         return ("LF", "SO", "TF", "FM", "NW", "NT")
 

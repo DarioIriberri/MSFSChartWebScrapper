@@ -6,7 +6,7 @@ from base_web_scrapper import BaseAIPScraper
 URL = "https://aip.enaire.es/AIP/"
 
 
-class EnaireSpainScraper(BaseAIPScraper):
+class SpainScraper(BaseAIPScraper):
     def get_icao_prefixes(self) -> tuple:
         return ("LE", "GC")
 

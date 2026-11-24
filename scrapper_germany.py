@@ -10,7 +10,7 @@ from base_web_scrapper import BaseAIPScraper
 AERO_IFR_URL = "https://aip.aero/de/en/ifr/"
 
 
-class DfsGermanyScraper(BaseAIPScraper):
+class GermanyScraper(BaseAIPScraper):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Match both ICAO/generic short codes and DFS long chart titles

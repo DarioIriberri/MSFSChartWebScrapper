@@ -5,7 +5,7 @@ from base_web_scrapper import BaseAIPScraper
 
 URL = "https://eaip.lvnl.nl/AIRAC%20AMDT%2011-2026_2026_10_29/eAIP/"
 
-class SiaNetherlandsScraper(BaseAIPScraper):
+class NetherlandsScraper(BaseAIPScraper):
     def get_icao_prefixes(self) -> tuple:
         return ("EH",)
 
