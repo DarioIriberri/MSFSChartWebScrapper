@@ -17,6 +17,7 @@ class AustriaScraper(BaseAIPScraper):
             "STAR",
             "TRANSITION",
             "INSTRUMENT APPROACH",
+            "VISUAL",
         )
 
     def get_icao_prefixes(self) -> tuple:

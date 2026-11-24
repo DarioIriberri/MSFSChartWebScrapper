@@ -27,8 +27,10 @@ class BaseAIPScraper(ABC):
         pass
 
     def clean_name(self, text: str) -> str:
-        return text
-        clean_str = "".join(c for c in text if c.isalnum() or c in (" ", "_", "-", ".")).strip()
+        normalized = text.replace("/", "-").replace("\\", "-")
+        clean_str = "".join(
+            c for c in normalized if c.isalnum() or c in (" ", "_", "-", ".")
+        ).strip()
         return " ".join(clean_str.split())
 
     from pathlib import Path
