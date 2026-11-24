@@ -5,6 +5,7 @@ from scrapper_germany import GermanyScraper
 from scrapper_portugal import PortugalScraper
 from scrapper_netherlands import NetherlandsScraper
 from scrapper_austria import AustriaScraper
+from scrapper_switzerland import SwitzerlandScraper
 
 BASE_DIR = r"Z:\MSFS2020\Airports"
 
@@ -36,6 +37,10 @@ def download_austria():
     print("\n--- Processing Austria ---")
     AustriaScraper(BASE_DIR).execute(headless=True)
 
+def download_switzerland():
+    print("\n--- Processing Switzerland ---")
+    SwitzerlandScraper(BASE_DIR).execute(headless=True)
+
 if __name__ == "__main__":
     print("=== STARTING AIP CHARTS DOWNLOAD ===")
 
@@ -46,6 +51,7 @@ if __name__ == "__main__":
     # download_germany()
     # download_portugal()
     # download_netherlands()
-    download_austria()
+    # download_austria()
+    download_switzerland()
 
     print("\n=== ALL PROCESSES COMPLETED! ===")
