@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 class BaseAIPScraper(ABC):
     def __init__(self, base_dir: str):
         self.base_dir = Path(base_dir)
-        self.allowed_types = ("ADC", "APDC", "GMC", "IAC", "SID", "STAR")
+        self.allowed_types = ("ADC", "APDC", "GMC", "IAC", "SID", "STAR", "TRANSITION")
 
     @abstractmethod
     def get_icao_prefixes(self) -> str:
@@ -27,6 +27,7 @@ class BaseAIPScraper(ABC):
         pass
 
     def clean_name(self, text: str) -> str:
+        return text
         clean_str = "".join(c for c in text if c.isalnum() or c in (" ", "_", "-", ".")).strip()
         return " ".join(clean_str.split())
 

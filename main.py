@@ -3,6 +3,7 @@ from scrapper_france import SiaFranceScraper
 from scrapper_italy import EnavItalyScraper
 from scrapper_germany import DfsGermanyScraper
 from scrapper_portugal import NavPortugalScraper
+from scrapper_netherlands import SiaNetherlandsScraper
 
 BASE_DIR = r"Z:\MSFS2020\Airports"
 
@@ -23,8 +24,12 @@ def download_germany():
     DfsGermanyScraper(BASE_DIR).execute(headless=True)
 
 def download_portugal():
-    print("\n--- Processing Portugal (SIA) ---")
+    print("\n--- Processing Portugal (NAV) ---")
     NavPortugalScraper(BASE_DIR).execute(headless=True)
+
+def download_netherlands():
+    print("\n--- Processing Netherlands (SIA) ---")
+    SiaNetherlandsScraper(BASE_DIR).execute(headless=False)
 
 if __name__ == "__main__":
     print("=== STARTING AIP CHARTS DOWNLOAD ===")
@@ -34,6 +39,7 @@ if __name__ == "__main__":
     # download_france()
     # download_italy()
     # download_germany()
-    download_portugal()
+    # download_portugal()
+    download_netherlands()
 
     print("\n=== ALL PROCESSES COMPLETED! ===")
